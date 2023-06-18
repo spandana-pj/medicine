@@ -1,0 +1,25 @@
+{%extends 'base.html'%}
+{%block body%}
+
+<div class="container mt-5">
+    <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+      {%csrf_token%}
+      <h2>Add Medicine</h2>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"> Medicine Name</label>
+          <input type="text" name="medicine_name" required class="form-control">
+        </div>
+          
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Medicinee desc</label>
+          <textarea class="form-control" name="medicine_desc"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Medicine Img</label>
+            <input type="file" class="form-control" name="medicine_img">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      </div>
+
+{%endblock%}

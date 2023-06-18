@@ -1,0 +1,62 @@
+{%extends 'base.html'%}
+{%block body%}
+
+      <div class="container mt-5">
+        <div class="mt-5">
+        <div class="mx-auto col-6">
+          <form >
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Search Medicine</label>
+            <input name="search" type="text" class="form-control">
+          </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+       
+          </form>
+          </div>
+
+      <table class="table table-bordered mt-5">
+        <thead>
+          <tr>
+            <th scope="col">{{forloop.counter}}</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Image</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%for medicine in medicines%}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{medicine.medicine_name}}</td>
+            <td>{{medicine.medicine_desc}}</td>
+            <td><img src="/media/{{medicine.medicine_img}}" style="height: 100px;width:100px"></td>
+           <td><a href="/del/{{medicine.id}}" class="btn btn-danger m-2">Delete</button>
+            <br>
+            <a href="/update_med/{{medicine.id}}" class="btn btn-success">Update</button></td>
+          
+          </tr>
+          {%endfor%}
+        </tbody>
+       
+      </table>
+
+      <div class="pagination">
+        <span class="step-links">
+            {% if medicines.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ medicines.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ medicines.number }} of {{ medicines.paginator.num_pages }}.
+            </span>
+    
+            {% if medicines.has_next %}
+                <a href="?page={{ medicines.next_page_number }}">next</a>
+                <a href="?page={{ medicines.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+{%endblock%}

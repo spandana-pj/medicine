@@ -1,0 +1,67 @@
+{%extends 'base.html'%}
+{%block body%}
+
+<div class="container mt-5">
+    <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+      {%csrf_token%}
+      <h2>Add Medicine</h2>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"> Medicine Name</label>
+          <input type="text" name="medicine_name" required class="form-control">
+        </div>
+          
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Medicine Desc</label>
+          <textarea class="form-control" name="medicine_desc"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Medicine Img</label>
+            <input type="file" class="form-control" name="medicine_img">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      </div>
+
+
+      <div class="container mt-5">
+        <div class="mt-5">
+        <div class="mx-auto col-6">
+          <form >
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Search Medicine</label>
+            <input name="search" type="text" class="form-control">
+          </div>
+          {%if request.user.is_authenticated%}
+            <button type="submit" class="btn btn-primary">Search</button>
+          {%endif%}
+          </form>
+          </div>
+
+      <table class="table table-bordered mt-5">
+        <thead>
+          <tr>
+            <th scope="col">{{forloop.counter}}</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Image</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%for medicine in medicines%}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{medicine.medicine_name}}</td>
+            <td>{{medicine.medicine_desc}}</td>
+            <td><img src="/media/{{medicine.medicine_img}}" style="height: 100px;width: 100px;"></td>
+           <td><a href="/del/{{medicine.id}}" class="btn btn-danger m-2">Delete</button>
+            <br>
+            <a href="/update_med/{{medicine.id}}" class="btn btn-success">Update</button></td>
+          
+          </tr>
+          {%endfor%}
+        </tbody>
+       
+      </table>
+
+{%endblock%}

@@ -1,0 +1,28 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block body%}
+<div class="container mt-5">
+    <form class="col-6 mx-auto card p-3" method="post" enctype="multipart/form-data">
+      {%csrf_token%}
+      <h2>Update Medicine</h2>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Medicine Name</label>
+          <input type="text" name="medicine_name" value="{{medicine.medicine_name}}" required class="form-control">
+        </div>
+          
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Medicne desc</label>
+          <textarea class="form-control" name="medicine_desc">{{medicine.medicine_desc}}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Medicine Img</label>
+            <input type="file" class="form-control" name="medicine_img">
+        </div>
+        <button type="submit" class="btn btn-primary">Update Medicine</button>
+      </form>
+
+    
+      
+
+    </div>
+{%endblock%}
